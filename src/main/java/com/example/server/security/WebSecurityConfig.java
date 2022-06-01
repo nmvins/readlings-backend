@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://server-license.herokuapp.com"));
+        configuration.setAllowedOrigins(Arrays.asList("https://server-license.herokuapp.com/"));
         configuration.setAllowedOriginPatterns(ImmutableList.of("*"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD",
                 "GET", "POST", "PUT", "DELETE", "PATCH"));
