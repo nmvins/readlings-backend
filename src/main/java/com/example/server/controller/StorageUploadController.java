@@ -79,7 +79,7 @@ public class StorageUploadController {
 //
 
         try {
-            FileInputStream fis = new FileInputStream(rootLocation + filename);
+            FileInputStream fis = new FileInputStream("/uploaded/" + filename);
             XWPFDocument file = new XWPFDocument(OPCPackage.open(fis));
             XWPFWordExtractor ext = new XWPFWordExtractor(file);
             System.out.println(ext.getText());
