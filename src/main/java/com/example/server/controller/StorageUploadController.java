@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +40,8 @@ public class StorageUploadController {
     StorageService storageService;
 
     List<String> files = new ArrayList<String>();
+
+    private final Path rootLocation = Paths.get("uploaded");
 
     @PostMapping("/store")
     public UploadFileResponse handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
@@ -74,14 +78,13 @@ public class StorageUploadController {
 //                .body(file);
 //
 
-
         try {
-            FileInputStream fis = new FileInputStream("D:/licenta/Newfolder(2)/server/uploaded/" + filename);
+            FileInputStream fis = new FileInputStream(rootLocation + filename);
             XWPFDocument file = new XWPFDocument(OPCPackage.open(fis));
             XWPFWordExtractor ext = new XWPFWordExtractor(file);
             System.out.println(ext.getText());
 
-            String filePath = "D:/licenta/Newfolder(2)/server/uploaded/" + filename.replace(".docx", "") + ".txt";
+            String filePath = rootLocation + filename.replace(".docx", "") + ".txt";
             File myObj = new File(filePath);
             FileWriter myWriter = new FileWriter(filePath);
             myWriter.write(ext.getText());
@@ -120,11 +123,11 @@ public class StorageUploadController {
 
         String parsedText;
         try {
-            pdDoc = PDDocument.load(new File("D:/licenta/Newfolder(2)/server/uploaded/" + filename));
+            pdDoc = PDDocument.load(new File(rootLocation + filename));
             pdfStripper = new PDFTextStripper();
             parsedText = pdfStripper.getText(pdDoc);
             System.out.println(parsedText.replaceAll("[^A-Za-z0-9. ]+", ""));
-            String filePath = "D:/licenta/Newfolder(2)/server/uploaded/" + filename.replace(".pdf", "") + ".txt";
+            String filePath = rootLocation + filename.replace(".pdf", "") + ".txt";
             File myObj = new File(filePath);
             FileWriter myWriter = new FileWriter(filePath);
             myWriter.write(parsedText);
