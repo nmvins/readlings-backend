@@ -17,6 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(ImmutableList.of("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("*", "https://server-license.herokuapp.com/"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD",
                 "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:
