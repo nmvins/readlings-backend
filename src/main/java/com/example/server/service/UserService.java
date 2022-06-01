@@ -56,4 +56,7 @@ public interface UserService {
     boolean updateAttention(String email, String attention);
     boolean updateSpeed(String email, String speed);
     boolean updateAge(String email, String age);
+
+    boolean updateLoginDate(String email, String date);
+    boolean updateLogoutDate(String email, String date);
 }

@@ -37,6 +37,10 @@ public class User {
     private List<String> speed;
     @ElementCollection
     private List<String> attention;
+    @ElementCollection
+    private List<String> loginDate;
+    @ElementCollection
+    private List<String> logoutDate;
     private String age;
 
     @ManyToMany
@@ -44,6 +48,22 @@ public class User {
 
     @ManyToMany
     private List<Challenge> doneChallenges;
+
+    public List<String> getLoginDate() {
+        return loginDate;
+    }
+
+    public void setLoginDate(List<String> loginDate) {
+        this.loginDate = loginDate;
+    }
+
+    public void setLogoutDate(List<String> logoutDate) {
+        this.logoutDate = logoutDate;
+    }
+
+    public List<String> getLogoutDate() {
+        return logoutDate;
+    }
 
     @ManyToMany
     private List<Book> books;

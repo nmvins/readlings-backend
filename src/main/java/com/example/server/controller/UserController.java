@@ -188,6 +188,42 @@ public class UserController {
         return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @PostMapping(path = "/addLoginDate")
+    public ResponseEntity<Boolean> addLoginDate(@RequestBody ObjectNode json) {
+        String email;
+        String date;
+        try {
+            email = new ObjectMapper().treeToValue(json.get("email"), String.class);
+            date = new ObjectMapper().treeToValue(json.get("date"), String.class);
+            boolean test = this.userService.updateLoginDate(email, date);
+            if (test)
+                return new ResponseEntity<>(test, HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            System.out.println("Parsing Exception!!");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @PostMapping(path = "/addLogoutDate")
+    public ResponseEntity<Boolean> addLogoutDate(@RequestBody ObjectNode json) {
+        String email;
+        String date;
+        try {
+            email = new ObjectMapper().treeToValue(json.get("email"), String.class);
+            date = new ObjectMapper().treeToValue(json.get("date"), String.class);
+            boolean test = this.userService.updateLogoutDate(email, date);
+            if (test)
+                return new ResponseEntity<>(test, HttpStatus.OK);
+        } catch (JsonProcessingException e) {
+            System.out.println("Parsing Exception!!");
+            e.printStackTrace();
+            return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+        }
+        return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+    }
+
     @PostMapping(path = "/updateAge")
     public ResponseEntity<Boolean> updateAge(@RequestBody ObjectNode json) {
         String email;

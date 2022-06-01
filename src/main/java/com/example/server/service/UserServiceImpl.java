@@ -238,6 +238,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateLoginDate(String email, String date) {
+        Optional<User> opt = this.userRepository.findByEmail(email);
+        User user;
+        if (opt.isPresent()) {
+            user = opt.get();
+            if (user.getLoginDate().add(date)) {
+                this.userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateLogoutDate(String email, String date) {
+        Optional<User> opt = this.userRepository.findByEmail(email);
+        User user;
+        if (opt.isPresent()) {
+            user = opt.get();
+            if (user.getLogoutDate().add(date)) {
+                this.userRepository.save(user);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean updateSpeed(String email, String speed) {
         Optional<User> opt = this.userRepository.findByEmail(email);
         User user;
